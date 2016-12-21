@@ -43,9 +43,6 @@
                     <li><a href="{{ route('admin.authors.index') }}">Penulis</a></li>
                     <li><a href="{{ route('admin.books.index') }}">Buku</a></li>
                     @endrole
-                    @if(auth()->check())
-                        <li><a href="{{ url('/settings/profile') }}">Profile</a></li>
-                    @endif
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -61,6 +58,10 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
+                                @if(auth()->check())
+                                <li><a href="{{ url('/settings/profile') }}">Profile</a></li>
+                                <li><a href="{{ url('/settings/password') }}">Change Password</a></li>
+                                @endif
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>

@@ -19,11 +19,11 @@ class SettingsController extends Controller
     	return view('settings.profile');
     }
 
-    public function edit() {
-    	return view('settings.edit');
+    public function editProfile() {
+    	return view('settings.editprofile');
     }
 
-    public function update(Request $request){
+    public function updateProfile(Request $request){
     	$user = Auth::user();
 
         $rules = [
@@ -53,4 +53,40 @@ class SettingsController extends Controller
 
         return redirect('settings/profile');
     }
+
+    public function editPass() {
+    	return view('settings.editpass');
+    }
+
+    public function updatePass(Request $request) {
+    	$user = Auth::user();
+        $rules = [
+            'password' => 'required|passcheck:'. $user->password,
+            'new_password' => 'required|confirmed|min:6',
+        ];
+
+        $messages = [
+            'required' => 'Field harus di isi alias tidak boleh kosong',
+            'password.passcheck' => 'Password lama tidak sesuai',
+            'confirmed' => 'Konfirmasi password tidak sesuai',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            return redirect('settings/password')
+                            ->withErrors($validator)
+                            ->withInput();
+        }
+
+        $user->password = bcrypt($request->get('new_password'));
+        $user->save();
+
+        Session::flash("flash_notif", [
+        	"level" => "success",
+        	"message" => "Password berhasil diubah"
+        ]);
+
+        return redirect('settings/password');
+    }
+
 }

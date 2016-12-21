@@ -32,8 +32,11 @@ Route::group(['middleware' => 'web'], function () {
 	]);
 
 	Route::get('settings/profile', 'SettingsController@profile');
-	Route::get('settings/profile/edit','SettingsController@edit');
-	Route::post('settings/profile','SettingsController@update');
+	Route::get('settings/profile/edit','SettingsController@editProfile');
+	Route::post('settings/profile','SettingsController@updateProfile');
+
+	Route::get('settings/password', 'SettingsController@editPass');
+	Route::post('settings/password', 'SettingsController@updatePass');
 
 	Route::group(['prefix'=>'admin', 'middleware'=>['auth','role:admin']], function () {
 		Route::resource('authors', 'AuthorsController');

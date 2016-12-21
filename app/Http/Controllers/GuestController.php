@@ -21,13 +21,9 @@ class GuestController extends Controller
     public function index(Request $request, Builder $htmlBuilder) {
     	if($request -> ajax()) {
 	    	$books = Book::with('author');
-            $status = BorrowLog::find(Auth::user()->id)->is_returned;
 	    	return Datatables::of($books) 
                 -> addColumn('stock', function($book){
                     return $book->stok;
-                }) 
-                -> addColumn('status', function($status){
-                    return $status->is_returned;
                 }) 
 	    		-> addColumn('action', function($book){
 	    		     if (Entrust::hasRole('admin')) return '';
@@ -37,7 +33,6 @@ class GuestController extends Controller
     	$html = $htmlBuilder 
     			-> addColumn(['data'=>'title','name'=>'title', 'title'=>'Judul'])
                 -> addColumn(['data'=>'stock','name'=>'stock','title'=>'Stok','orderable'=>false,'searchable'=>false])
-                -> addColumn(['data'=>'status','name'=>'status','title'=>'Status','orderable'=>false,'searchable'=>false])
     			-> addColumn(['data'=>'author.name','name'=>'author.name','title'=>'Penulis'])
     			-> addColumn(['data'=>'action','name'=>'action','title'=>'Action','orderable'=>false,'searchable'=>false]);
 
