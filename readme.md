@@ -1,6 +1,6 @@
 # Laravel PHP Framework
 
-This is developed by Laravel 5.3 Version
+This is developed by Laravel 5.2 Version
 
 Installation
 
