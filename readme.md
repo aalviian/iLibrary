@@ -4,12 +4,12 @@ This is developed by Laravel 5.3 Version
 
 Installation
 
-git clone https://github.com/aalviian/iLibrary.git projectname
-cd projectname
-composer install
-php artisan key:generate
-Create a database and inform .env
-php artisan migrate --seed to create and populate tables
-Inform config/mail.php for email sends
-php artisan vendor:publish to publish filemanager
-php artisan serve to start the app on http://localhost:8000/
+1. git clone https://github.com/aalviian/iLibrary.git projectname
+2. cd projectname
+3. composer install
+4. php artisan key:generate
+5. Create a database and inform .env
+6. php artisan migrate --seed to create and populate tables
+7. Inform config/mail.php for email sends
+8. php artisan vendor:publish to publish filemanager
+9. php artisan serve to start the app on http://localhost:8000/
