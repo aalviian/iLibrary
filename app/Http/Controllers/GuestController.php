@@ -22,7 +22,7 @@ class GuestController extends Controller
     	if($request -> ajax()) {
 	    	$books = Book::with('author');
             $status = BorrowLog::find(Auth::user()->id)->is_returned;
-	    	return Datatables::of($books)
+	    	return Datatables::of($books) 
                 -> addColumn('stock', function($book){
                     return $book->stok;
                 }) 

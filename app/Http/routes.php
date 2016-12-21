@@ -15,19 +15,25 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/home', 'GuestController@index');
     Route::auth();
 
+    Route::get('auth/verify/{token}', 'Auth\RegisterController@verify');
+
+    Route::get('/mail', 'HomeController@mail');
+
 	Route::get('guest/{book}/borrow', [
 		'middleware'=>['auth','role:member'],
 		'as'=>'guest.books.borrow',
 		'uses'=>'GuestController@borrow'
 	]);
 
-	Route::get('mail', 'HomeController@mail');
-
-	Route::put('books/{book}/return', [
+	Route::put('guest/{book}/return', [
 		'middleware'=>['auth','role:member'],
 		'as'=>'guest.books.return',
 		'uses'=>'GuestController@returned'
 	]);
+
+	Route::get('settings/profile', 'SettingsController@profile');
+	Route::get('settings/profile/edit','SettingsController@edit');
+	Route::post('settings/profile','SettingsController@update');
 
 	Route::group(['prefix'=>'admin', 'middleware'=>['auth','role:admin']], function () {
 		Route::resource('authors', 'AuthorsController');

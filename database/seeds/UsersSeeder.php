@@ -30,6 +30,7 @@ class UsersSeeder extends Seeder
         $admin -> name = "Alvian";
         $admin -> email = "aalviian@gmail.com";
         $admin -> password = bcrypt('admin');
+        $admin -> is_verified = 1;
         $admin -> save();
         $admin -> attachRole($adminRole);
 
@@ -38,6 +39,7 @@ class UsersSeeder extends Seeder
         $admin -> name = "Kamal";
         $admin -> email = "imkamalh@gmail.com";
         $admin -> password = bcrypt('member');
+        $admin -> is_verified = 1;
         $admin -> save();
         $admin -> attachRole($memberRole);
 

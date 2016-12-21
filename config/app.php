@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -160,6 +160,7 @@ return [
         Yajra\Datatables\DatatablesServiceProvider::class,
         Elasticquent\ElasticquentServiceProvider::class,
         Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
+        Amkr\Laravel\Guzzle\Providers\GuzzleServiceProvider::class,
 
 
     ],
@@ -212,6 +213,7 @@ return [
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
         'Input' => Illuminate\Support\Facades\Input::class,
         'Es' => Elasticquent\ElasticquentElasticsearchFacade::class,
+        'Guzzle' => Amkr\Laravel\Guzzle\Facades\Guzzle::class,
     ],
 
 ];

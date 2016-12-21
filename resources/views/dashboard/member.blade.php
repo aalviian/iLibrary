@@ -19,7 +19,7 @@ Selamat datang di Larapus.
 			@endif
 			<ul>
 				@foreach ($borrowLogs as $borrowLog)
-				<li>
+				<li> 
 				{!! Form::open(['url'=>route('guest.books.return', $borrowLog->book_id),
 					'method' => 'put',
 					'class' => 'form-inline js-confirm',

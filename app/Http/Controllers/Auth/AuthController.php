@@ -39,6 +39,7 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
+        $this->middleware('userverification');
     }
 
     /**
@@ -53,7 +54,6 @@ class AuthController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
-            'g-recaptcha-response' => 'required|captcha',
         ]);
     }
 
@@ -72,6 +72,12 @@ class AuthController extends Controller
         ]);
         $memberRole = Role::where('name', 'member')->first();
         $user->attachRole($memberRole);
+        $user->sendVerification();
         return $user;
     }
+
+    public function verify(Request $request, $token) { 
+
+    }
+
 }

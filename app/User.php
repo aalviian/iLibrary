@@ -7,6 +7,7 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
 use App\Book;
 use App\BorrowLog;
 use App\Exceptions\BookException;
+use Mail;
 
 class User extends Authenticatable
 {
@@ -30,8 +31,23 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $casts = [
+        'is_verified' => 'boolean',
+    ];
+
     public function getAuthIdentifier() {
         return $this->getKey();
+    }
+
+    public function sendVerification() {
+        $user = $this;
+        $token = str_random(40);
+        $user->verification_token = $token;
+        $user->save();
+
+        Mail::send('auth.emails.verification', compact('user', 'token'), function($mail) use ($user) {
+            $mail -> to($user->email, $user->name) -> subject('Verifikasi Akun iLibrary');
+        });
     }
 
     public function borrowLogs() {
@@ -51,4 +67,5 @@ class User extends Authenticatable
         $borrowLog = BorrowLog::create(['user_id'=>$this->id, 'book_id'=>$book->id]);
         return $borrowLog;
     }
+
 }

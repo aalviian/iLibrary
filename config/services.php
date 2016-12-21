@@ -15,15 +15,15 @@ return [
     */
 
     'mailgun' => [
-        'domain' => env('MAILGUN_DOMAIN'),
-        'secret' => env('MAILGUN_SECRET'),
+        'domain' => 'sandbox1ad202480b4b4712a3fa3def5c11fff5.mailgun.org',
+        'secret' => 'key-43108bba5876de4f23c6b998740cb468',
     ],
-
+ 
     'ses' => [
         'key' => env('SES_KEY'),
         'secret' => env('SES_SECRET'),
         'region' => 'us-east-1',
-    ],
+    ], 
 
     'sparkpost' => [
         'secret' => env('SPARKPOST_SECRET'),

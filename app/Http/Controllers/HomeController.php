@@ -44,12 +44,12 @@ class HomeController extends Controller
 
     public function mail()
     {
-        $user = User::find(1)->toArray();
-        Mail::send('auth.emails.password', $user, function($message) use ($user) {
-            $message->to('aalviian@gmail.com');
-            $message->subject('Mailgun Testing');
+        $user = User::find(2);
+        Mail::send('confirm.verification', ['user' => $user], function ($m) use ($user) {
+            $m->from('admin@ilibrary.com', 'iLibrary Admin');
+
+            $m->to($user->email, $user->name)->subject('Hello from iLibrary!');
         });
-        dd('Mail Send Successfully');
     }
 
 }
